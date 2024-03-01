@@ -4,6 +4,8 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 ## Upcoming version 5.x.x (`develop` branch)
 
+<!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
+
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
