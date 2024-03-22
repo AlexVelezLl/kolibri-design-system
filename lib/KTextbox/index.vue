@@ -7,6 +7,7 @@
       class="textbox"
       :label="label"
       :disabled="disabled"
+      :clearable="clearable"
       :invalid="showInvalidMessage"
       :error="invalidText"
       :autofocus="autofocus"
@@ -139,6 +140,10 @@
        * Whether to display as a multi-line text area
        */
       textArea: {
+        type: Boolean,
+        default: false,
+      },
+      clearable: {
         type: Boolean,
         default: false,
       },
