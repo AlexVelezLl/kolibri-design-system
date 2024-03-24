@@ -18,7 +18,7 @@
 
     <div class="ui-textbox-content ">
       <label class="ui-textbox-label">
-        <div class="ui-input-content" :clearable="clearable">
+        <div :class="['ui-input-content', inputContentClasses]" :clearable="clearable">
           <input v-if="!multiLine" ref="input" v-autofocus="autofocus" class="ui-textbox-input"
             :autocapitalize="autocapitalize ? autocapitalize : null" :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled" :max="maxValue" :maxlength="enforceMaxlength ? maxlength : null" :minlength="minlength"
@@ -30,17 +30,15 @@
 
           <textarea v-else ref="textarea" v-autofocus="autofocus" :value="value" class="ui-textbox-textarea"
             :autocapitalize="autocapitalize ? autocapitalize : null" :autocomplete="autocomplete ? autocomplete : null"
-             :disabled="disabled" :maxlength="enforceMaxlength ? maxlength : null"
-            :minlength="minlength" :name="name" :placeholder="hasFloatingLabel ? null : placeholder"
-            :readonly="readonly" :required="required" :rows="rows"
+            :disabled="disabled" :maxlength="enforceMaxlength ? maxlength : null" :minlength="minlength" :name="name"
+            :placeholder="hasFloatingLabel ? null : placeholder" :readonly="readonly" :required="required" :rows="rows"
             :style="isActive ? { borderBottomColor: $themeTokens.primaryDark } : {}" :tabindex="tabindex" @blur="onBlur"
             @change="onChange" @focus="onFocus" @input="updateValue($event.target.value)"
             @keydown.enter="onKeydownEnter" @keydown="onKeydown">
       </textarea>
-          <div v-show="value" class="ui-clear-button" @click="clearText">
-            <UiIcon> <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="v-icon__svg" viewBox="0 0 24 24"><path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41 15.59 7Z"/></svg>
-            </UiIcon>
-          </div>
+          <button v-if="showClearButton" class="ui-clear-button" @click="clearText">
+            <KIcon class="ui-clear-icon" color="gray" icon="clear" />
+          </button>
         </div>
         <div v-if="label || $slots.default" class="ui-textbox-label-text" :class="labelClasses">
           <slot>{{ label }}</slot>
@@ -186,9 +184,18 @@ export default {
   },
 
   computed: {
+    
     showClearButton() {
       return this.clearable && this.value;
     },
+
+    inputContentClasses() {
+      return {
+        'clear-button-padding': this.clearable,
+        'multi-line': this.multiLine,
+      };
+    },
+
     classes() {
       return [
         `ui-textbox--icon-position-${this.iconPosition}`,
@@ -401,9 +408,48 @@ export default {
   .ui-input-content {
     display: grid;
     grid-template-columns: 1fr auto;
-    column-gap: 0.5rem;
-    align-items: start;
-    
+    position: relative;
+  }
+
+  .ui-input-content:not(.clear-button-padding){
+        padding-right: 0;
+  }
+
+    .ui-input-content.clear-button-padding {
+        padding-right: rem(24px);    }
+
+
+.ui-input-content:not(.multi-line) .ui-clear-button {
+  padding: 0;
+    border: none;
+    background: none;
+    outline: none;
+    display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 24px;
+      height: 30px;
+}
+  .ui-input-content.multi-line .ui-clear-button {
+    padding: 0;
+      border: none;
+      background: none;
+      outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 22px;
+  }
+
+  .ui-clear-icon {
+    cursor: pointer;
   }
 
   .ui-cle &.has-label {
@@ -442,13 +488,7 @@ export default {
       opacity: 1;
     }
 
-    .ui-clear-button {
-      cursor: pointer;
-      overflow: hidden;
-      opacity: 1;
-
-    }
-
+   
     // Fixes glitch in chrome where label and input value overlap each other
     // when webkit-autofill value has not been propagated yet (e.g. https://github.com/vuejs/vue/issues/1331)
     // The webkit-autofill value will only be propagated on first click into the viewport.

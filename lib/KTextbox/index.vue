@@ -143,6 +143,9 @@
         type: Boolean,
         default: false,
       },
+      /**
+       * When set to `true`, the component displays a clear button inside the input field.
+       */
       clearable: {
         type: Boolean,
         default: false,

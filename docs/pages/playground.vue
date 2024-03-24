@@ -23,7 +23,6 @@
     /> -->
 
     <!-- Play around with your component here: -->
-
   </div>
 
 </template>
@@ -31,11 +30,13 @@
 
 <script>
 
+  import KTextbox from '../../lib/KTextbox/index.vue';
+
   /*
-        Playground is a Vue component too,
-        so you can also use `data`, `methods`, etc.
-        as usual if helpful
-      */
+          Playground is a Vue component too,
+          so you can also use `data`, `methods`, etc.
+          as usual if helpful
+        */
   export default {
     name: 'Playground',
     data() {
