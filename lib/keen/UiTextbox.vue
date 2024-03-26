@@ -18,7 +18,7 @@
 
     <div class="ui-textbox-content ">
       <label class="ui-textbox-label">
-        <div :class="['ui-input-content', inputContentClasses]" :clearable="clearable">
+        <div :class="['ui-input-content', inputContentClasses]">
           <input v-if="!multiLine" ref="input" v-autofocus="autofocus" class="ui-textbox-input"
             :autocapitalize="autocapitalize ? autocapitalize : null" :autocomplete="autocomplete ? autocomplete : null"
             :disabled="disabled" :max="maxValue" :maxlength="enforceMaxlength ? maxlength : null" :minlength="minlength"
@@ -36,9 +36,8 @@
             @change="onChange" @focus="onFocus" @input="updateValue($event.target.value)"
             @keydown.enter="onKeydownEnter" @keydown="onKeydown">
       </textarea>
-          <button v-if="showClearButton" class="ui-clear-button" @click="clearText">
-            <KIcon class="ui-clear-icon" color="gray" icon="clear" />
-          </button>
+          <KIconButton icon="clear" :color="$themeTokens.annotation" v-if="showClearButton" size="small"  @click="clearText"/>
+
         </div>
         <div v-if="label || $slots.default" class="ui-textbox-label-text" :class="labelClasses">
           <slot>{{ label }}</slot>
@@ -78,6 +77,7 @@
 
 import autosize from 'autosize';
 import UiIcon from './UiIcon.vue';
+import KIconButton from '../buttons-and-links/KIconButton.vue';
 
 const autofocus = {
   inserted(el, { value }) {
@@ -416,41 +416,8 @@ export default {
   }
 
     .ui-input-content.clear-button-padding {
-        padding-right: rem(24px);    }
-
-
-.ui-input-content:not(.multi-line) .ui-clear-button {
-  padding: 0;
-    border: none;
-    background: none;
-    outline: none;
-    display: flex;
-      align-items: center;
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 24px;
-      height: 30px;
-}
-  .ui-input-content.multi-line .ui-clear-button {
-    padding: 0;
-      border: none;
-      background: none;
-      outline: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 24px;
-    height: 22px;
-  }
-
-  .ui-clear-icon {
-    cursor: pointer;
-  }
+        padding-right: 0.15rem;
+    }
 
   .ui-cle &.has-label {
     .ui-textbox-icon-wrapper {
@@ -483,10 +450,7 @@ export default {
       }
     }
 
-    .ui-input-content:hover .ui-clear-button,
-    .ui-input-content:focus-within .ui-clear-button {
-      opacity: 1;
-    }
+    
 
    
     // Fixes glitch in chrome where label and input value overlap each other
@@ -592,6 +556,10 @@ export default {
 }
 
 .ui-textbox-textarea {
+ border:none
+}
+
+.ui-input-content{
   border-bottom-color: $ui-input-border-color;
   border-bottom-style: solid;
   border-bottom-width: $ui-input-border-width;
