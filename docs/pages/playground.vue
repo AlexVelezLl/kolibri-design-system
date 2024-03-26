@@ -23,6 +23,8 @@
     /> -->
 
     <!-- Play around with your component here: -->
+    <!--<KTextbox :clearable="true" :textArea="true" label="labelll" />-->
+
   </div>
 
 </template>
@@ -30,7 +32,7 @@
 
 <script>
 
-  import KTextbox from '../../lib/KTextbox/index.vue';
+  //import KTextbox from '../../lib/KTextbox/index.vue';
 
   /*
           Playground is a Vue component too,
