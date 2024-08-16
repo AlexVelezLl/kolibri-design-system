@@ -6,6 +6,28 @@ Changelog is rather internal in nature. See release notes for the public overvie
 
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
+- [719]
+  - **Description:** Removes KResponsiveWindowMixin.
+  - **Products impact:** removed API.
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/679.
+  - **Components:** KResponsiveWindowMixin.
+  - **Breaking:** yes.
+  - **Impacts a11y:** no.
+  - **Guidance:** Replace any use of KResponsiveWindowMixin with the new composable useKResponsiveWindow.
+
+[719]: https://github.com/learningequality/kolibri-design-system/pull/719
+
+- [#718]
+  - **Description:** This pull request resolves failing `KDateCalendar` component tests that occurred on the last day of the month in open pull requests by setting dates manually in the tests. Additionally, the `KDateCalendar` is updated to show the month of the `lastAllowedDate` property.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/713
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#718]: https://github.com/learningequality/kolibri-design-system/pull/718
+
 - [#687]
   - **Description:** Adds logic that inserts ARIA live assertive and polite regions to an application's document body during KDS initialization and documents this on the new "Installation" page. Relatedly adds `useKLiveRegion` composable with public methods for updating the live regions with assertive and polite messages. 
   - **Products impact:** new API
@@ -16,6 +38,7 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:** Find all polite and live regions (or roles) in an application. Remove them and instead use `useKLiveRegion.sendPoliteMessage` and `useKLiveRegion.sendAssertiveMessage` to update the live regions that KDS inserted to document body during installation.
 
 [#687]: https://github.com/learningequality/kolibri-design-system/pull/687
+
  [#688]
   - **Description:**  Update`KCard` styling 
   - **Products impact:**  Card updates 
@@ -26,7 +49,6 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Guidance:**
  [#688] https://github.com/learningequality/kolibri-design-system/pull/688
 
-
 [#707]
   - **Description:** Card Validations
   - **Products impact:**  
@@ -36,6 +58,17 @@ Changelog is rather internal in nature. See release notes for the public overvie
   - **Impacts a11y:**  No
   - **Guidance:**
  [#707] https://github.com/learningequality/kolibri-design-system/pull/707
+
+ [#706]
+  - **Description:** Add new alignment options to `KCard` 
+  - **Products impact:**  new alignment 
+  - **Addresses:** [#701](https://github.com/learningequality/kolibri-design-system/issues/701)
+  - **Components:** `KCard` 
+  - **Breaking:** N0
+  - **Impacts a11y:** No
+  - **Guidance:**
+[#706]: https://github.com/learningequality/kolibri-design-system/pull/706
+
 
 [#709]
   - **Description:**  Update spaces to the latest design`KCard` 
