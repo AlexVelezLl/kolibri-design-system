@@ -12,6 +12,14 @@ Addresses #*PR# HERE*
 <!-- Insert images here if applicable -->
 
 ## Changelog
+
+<!--
+  Do not change this section's content without updating
+  - .github/workflows/changelog.yml
+  - .github/workflows/update_changelog.yml
+  accordingly
+-->
+
 <!-- [DO NOT REMOVE-USED BY GH ACTION] CHANGELOG START -->
 
 <!--
