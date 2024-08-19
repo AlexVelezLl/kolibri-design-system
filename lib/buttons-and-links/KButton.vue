@@ -61,7 +61,7 @@
   import buttonMixin from './buttonMixin.js';
 
   /**
-   * The KButton component is used to trigger actions
+   * The KButton component is used to  trigger actions
    */
   export default {
     name: 'KButton',
