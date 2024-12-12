@@ -38,11 +38,11 @@
 <script>
 
   import throttle from 'lodash/throttle';
+  import debounce from 'lodash/debounce';
   import NavSectionList from './NavSectionList';
   import { termList, matches } from '~/common/DocsFilter/utils';
   import tableOfContents from '~/tableOfContents.js';
-  import debounce from 'lodash/debounce';
- 
+
   export default {
     name: 'SideNav',
     components: {
@@ -82,62 +82,66 @@
     watch: {
       filterText(newValue) {
         if (window) {
-         //Clear the filter query when filtertext is empty
-        if (!newValue) {
-          this.$router.replace({ path: this.$route.path, query: {} });
+          //Clear the filter query when filtertext is empty
+          if (!newValue) {
+            this.$router.replace({ path: this.$route.path, query: {} });
+          } else {
+            //else ,update the filter query param
+            this.$router.push({
+              path: this.$route.path,
+              query: { ...this.$route.query, filter: newValue },
+            });
+          }
+          this.debouncedUpdateQuery(newValue);
         }
-        else {
-          //else ,update the filter query param
-          this.$router.push({ path: this.$route.path, query: { ...this.$route.query, filter: newValue}});
-        }
-        this.debouncedUpdateQuery(newValue);
-        }
-      }
+      },
     },
-   mounted() {
-    if (window) {
-    const { filter } = this.$route.query;
-      // Set filterText from the query parameter if it exists
-    if (filter) {
-      this.filterText = filter;
-    }
-     this.$refs.links.scrollTop = window.sessionStorage.getItem('nav-scroll');
-     // Restoring filter state when a user navigates back
-     window.addEventListener('popstate', (event) => {
-       if (event.state && 'filterText' in event.state) {
-         this.filterText = event.state.filterText;
-       } else {
-         this.filterText = ''; // Reset if no filterText is in state
-       }
-     });
-       // Create debounced function for updating the query
-    this.debouncedUpdateQuery = debounce((newValue) => {
-      if (newValue) {
-        this.$router.push({ path: this.$route.path, query: { ...this.$route.query, filter: newValue } });
-      } 
-      else {
-        this.$router.push({ path: this.$route.path, query: {} });
+    mounted() {
+      if (window) {
+        const { filter } = this.$route.query;
+        // Set filterText from the query parameter if it exists
+        if (filter) {
+          this.filterText = filter;
+        }
+        this.$refs.links.scrollTop = window.sessionStorage.getItem('nav-scroll');
+        // Restoring filter state when a user navigates back
+        window.addEventListener('popstate', event => {
+          if (event.state && 'filterText' in event.state) {
+            this.filterText = event.state.filterText;
+          } else {
+            this.filterText = ''; // Reset if no filterText is in state
+          }
+        });
+        // Create debounced function for updating the query
+        this.debouncedUpdateQuery = debounce(newValue => {
+          if (newValue) {
+            this.$router.push({
+              path: this.$route.path,
+              query: { ...this.$route.query, filter: newValue },
+            });
+          } else {
+            this.$router.push({ path: this.$route.path, query: {} });
+          }
+        }, 2000); // 2-second debounce delay
       }
-    }, 2000); // 2-second debounce delay
-    }
 
-  // Modify navigation links to preserve the filter query
-  this.$nextTick(() => {
-    this.$refs.links.querySelectorAll('a').forEach((link) => {
-      link.addEventListener('click', (event) => {
-        event.preventDefault();
-        const href = new URL(link.href);
-        this.$router.push({
-          path: href.pathname,
-          query: { ...this.$route.query } // Add existing query params to the new path
+      // Modify navigation links to preserve the filter query
+      this.$nextTick(() => {
+        this.$refs.links.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', event => {
+            event.preventDefault();
+            const href = new URL(link.href);
+            this.$router.push({
+              path: href.pathname,
+              query: { ...this.$route.query }, // Add existing query params to the new path
+            });
+          });
         });
       });
-    });
-  });
-  //  Don't show the nav until the state is set
-  this.loaded = true;
-},
-     methods: {
+      //  Don't show the nav until the state is set
+      this.loaded = true;
+    },
+    methods: {
       throttleHandleScroll: throttle(function handleScroll() {
         window.sessionStorage.setItem('nav-scroll', this.$refs.links.scrollTop);
       }, 100),
