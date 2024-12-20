@@ -201,10 +201,16 @@
         }
       },
 
+      /**
+       * @public
+       */
       doShow() {
         this.showPopper = true;
       },
 
+      /**
+       * @public
+       */
       doClose() {
         this.showPopper = false;
       },
