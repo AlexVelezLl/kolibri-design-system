@@ -14,14 +14,13 @@
           @keyup.esc.stop="emitCancelEvent"
           @keyup.enter="handleEnter"
         >
-          <!-- KeenUiSelect targets modal by using div.modal selector -->
           <div
             ref="modal"
             class="modal"
             :tabindex="0"
             role="dialog"
             aria-labelledby="modal-title"
-            :style="[modalSizeStyles, { background: $themeTokens.surface }, { overflowY: 'auto' }]"
+            :style="modalStyles"
           >
             <!-- Modal Title -->
             <h1
@@ -216,11 +215,13 @@
       };
     },
     computed: {
-      modalSizeStyles() {
+      modalStyles() {
         return {
           'max-width': `${this.maxModalWidth - 32}px`,
           'max-height': `${this.windowHeight - 32}px`,
           width: this.modalWidth,
+          background: this.$themeTokens.surface,
+          overflowY: 'auto',
         };
       },
       modalWidth() {

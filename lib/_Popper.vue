@@ -9,6 +9,7 @@
      - Allow for appending to a chosen element rather than to body,
        typically to the overlay container element #k-overlay.
        'appendToBody' prop changedto 'appendToEl' and related changes.
+     - Add 'closeOnScroll' prop to close the popper on scroll.
   -->
 
   <span>
@@ -220,12 +221,16 @@
         this.showPopper = false;
       },
 
+      // Debouncing as we don't need to check this on every scroll event on a
+      // "scroll session", just the first one, and although very unlikely, the last one
       doCloseOnScroll: debounce(
         function (event) {
           const popperEl = this.$refs.popper;
           if (
             !popperEl ||
+            // ignore scrolls inside the popper
             this.elementContains(popperEl, event.target) ||
+            // ignore scrolls unrelated to the popper reference, just from the ancestors
             !this.elementContains(event.target, this.referenceElm)
           ) {
             return;

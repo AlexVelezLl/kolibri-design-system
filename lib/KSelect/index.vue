@@ -201,7 +201,7 @@
   import { looseIndexOf, looseEqual } from '../keen/helpers/util';
   import { scrollIntoView, resetScroll } from '../keen/helpers/element-scroll';
   import config from '../keen/config';
-  import Popper from '../KTooltip/Popper.vue';
+  import Popper from '../_Popper.vue';
   import _useOverlay from '../composables/_useOverlay';
   import KSelectOption from './KSelectOption.vue';
 
@@ -241,6 +241,9 @@
 
       onMounted(() => {
         const overlayEl = getOverlayEl();
+        // set appendToEl on mounted to avoid SSR issues, and to wait for the component
+        // to be mounted before rendering the popper component, as it needs
+        // the reference to be rendered first
         appendToEl.value = overlayEl;
       });
 
@@ -377,7 +380,6 @@
     data() {
       return {
         query: '',
-        isInsideModal: false,
         isActive: false,
         isTouched: false,
         highlightedOption: null,
@@ -480,6 +482,7 @@
             applyStyle: {
               enabled: true,
               fn: throttle(data => {
+                // Set the width of the dropdown to match the width of the label
                 data.styles.width = `${data.offsets.reference.width}px`;
                 Object.assign(data.instance.popper.style, data.styles);
                 return data;
@@ -487,6 +490,9 @@
             },
             preventOverflow: {
               enabled: true,
+              // Set boundaries to be the viewport so that the dropdown is not cut off
+              // by the parent container, and can calculate the flip behavior having the
+              // viewport as reference
               boundariesElement: 'viewport',
             },
           },
@@ -616,14 +622,6 @@
       if (!this.selection || this.selection === '') {
         this.setValue(null);
       }
-    },
-
-    mounted() {
-      // look for KSelects nested within modals
-      const allSelects = document.querySelectorAll('div.modal div.ui-select');
-      // create array from a nodelist [IE does not support Array.from()]
-      const allSelectsArr = Array.prototype.slice.call(allSelects);
-      this.isInsideModal = allSelectsArr.includes(this.$el);
     },
 
     methods: {
@@ -800,8 +798,8 @@
 
       async closeDropdown(options = { autoBlur: false }) {
         this.$refs.dropdownPopper.doClose();
-        await this.$nextTick();
         if (!options.autoBlur) {
+          await this.$nextTick();
           this.$refs.label.focus();
           this.isActive = true;
         }
@@ -826,6 +824,8 @@
       },
 
       selectBlur() {
+        // A diffent blur (other than the `onBlur` method) is needed for the label
+        // to prevent the dropdown from closing
         if (!this.isDropdownOpen) {
           this.isActive = false;
         }
@@ -879,7 +879,8 @@
         this.$emit('dropdown-close');
       },
 
-      scrollOptionIntoView(optionEl) {
+      async scrollOptionIntoView(optionEl) {
+        await this.$nextTick();
         scrollIntoView(optionEl, {
           container: this.$refs.optionsList,
           marginTop: 180,
@@ -1081,6 +1082,7 @@
   .ui-select-dropdown {
     @extend %dropshadow-2dp;
 
+    position: absolute;
     z-index: $z-index-dropdown;
     margin-top: 2px;
     list-style-type: none;
