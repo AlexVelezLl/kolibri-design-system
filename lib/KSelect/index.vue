@@ -94,6 +94,7 @@
         <Popper
           v-if="appendToEl"
           ref="dropdownPopper"
+          closeOnScroll
           transition="ui-select-transition-fade"
           trigger="click"
           :appendToEl="appendToEl"

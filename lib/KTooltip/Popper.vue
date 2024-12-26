@@ -33,6 +33,7 @@
 
 <script>
 
+  import debounce from 'lodash/debounce';
   import Popper from 'popper.js';
 
   function on(element, event, handler) {
@@ -115,6 +116,10 @@
         default() {
           return {};
         },
+      },
+      closeOnScroll: {
+        type: Boolean,
+        default: false,
       },
     },
 
@@ -215,6 +220,24 @@
         this.showPopper = false;
       },
 
+      doCloseOnScroll: debounce(
+        function (event) {
+          const popperEl = this.$refs.popper;
+          if (
+            !popperEl ||
+            this.elementContains(popperEl, event.target) ||
+            !this.elementContains(event.target, this.referenceElm)
+          ) {
+            return;
+          }
+
+          this.doClose();
+        },
+        100,
+        // check as soon as the event is triggered
+        { leading: true },
+      ),
+
       doDestroy() {
         if (this.showPopper) {
           return;
@@ -228,6 +251,9 @@
         if (this.isAppendedToEl) {
           this.isAppendedToEl = false;
           this.appendToEl.removeChild(this.popper.parentElement);
+        }
+        if (this.closeOnScroll) {
+          document.removeEventListener('scroll', this.doCloseOnScroll, true);
         }
       },
 
@@ -265,6 +291,10 @@
           };
 
           this.popperJS = new Popper(this.referenceElm, this.popper, this.popperOptions);
+
+          if (this.closeOnScroll) {
+            document.addEventListener('scroll', this.doCloseOnScroll, true);
+          }
         });
       },
 
