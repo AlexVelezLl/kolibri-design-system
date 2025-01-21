@@ -360,7 +360,9 @@
         }
         // focus has escaped the modal - put it back!
         if (!this.$refs.modal.contains(target)) {
-          this.focusModal();
+          this.$nextTick(() => { // flush any pending DOM/focus updates
+            this.focusModal();
+          })
         }
       },
     },
