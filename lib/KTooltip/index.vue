@@ -2,6 +2,7 @@
 
   <Popper
     v-if="readyToInit"
+    closeOnScroll
     :reference="htmlElement"
     :disabled="disabled"
     :visibleArrow="false"

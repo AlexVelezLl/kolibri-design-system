@@ -13,8 +13,6 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <!-- @slot Slot alternative to the `icon` prop -->
-    <slot name="icon"></slot>
     <KIcon
       v-if="icon"
       :icon="icon"
@@ -24,8 +22,6 @@
     />
     <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
     <slot name="menu"></slot>
-
-    <slot v-if="$slots.default"></slot>
 
     <template>
       <span
