@@ -85,6 +85,13 @@
             },
           },
         },
+        onTrigger(instance) {
+          const closeOnScroll = () => {
+            instance.hide();
+            window.removeEventListener('scroll', closeOnScroll, true);
+          };
+          window.addEventListener('scroll', closeOnScroll, true);
+        },
       };
 
       if (!this.appendToBody) {

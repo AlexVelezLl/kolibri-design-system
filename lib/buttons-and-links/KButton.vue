@@ -13,8 +13,6 @@
     @mouseenter="hovering = true"
     @mouseleave="hovering = false"
   >
-    <!-- @slot Slot alternative to the `icon` prop -->
-    <slot name="icon"></slot>
     <KIcon
       v-if="icon"
       :icon="icon"
