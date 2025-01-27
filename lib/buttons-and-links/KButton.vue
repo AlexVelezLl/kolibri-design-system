@@ -23,8 +23,6 @@
     <!-- @slot Pass sub-components into the button, typically `KDropdownMenu` -->
     <slot name="menu"></slot>
 
-    <slot v-if="$slots.default"></slot>
-
     <template>
       <span
         class="link-text"
