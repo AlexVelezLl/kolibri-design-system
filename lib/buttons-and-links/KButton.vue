@@ -152,12 +152,9 @@
             }
           }
         }
-
-
         if (this.iconAfter) {
           styles['marginRight'] = '8px';
         }
-
         return { ...styles };
       },
     },
