@@ -1,6 +1,12 @@
 name: Percy Visual Tests
 
-on: [pull_request_target]
+on:
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - closed
 
 jobs:
   pre_job:
@@ -26,9 +32,15 @@ jobs:
       percy_url: ${{ steps.extract-url.outputs.percy_url }}
     steps:
       - name: Checkout code from PR
+        if: github.event.pull_request.merged == false
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+      - name: Checkout code from target branch
+        if: github.event.pull_request.merged == true
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -46,7 +58,7 @@ jobs:
           npm rebuild node-sass
       - name: Download Chromium
         run: npx puppeteer browsers install chrome
-      - name: Extract jsdocs and environment info 
+      - name: Extract jsdocs and environment info
         run: yarn pregenerate
       - name: Run visual tests
         run: yarn test:visual 2>&1 | tee test-output.log
@@ -57,11 +69,11 @@ jobs:
         run: |
           url=$(grep -o 'https://percy.io/[a-zA-Z0-9/_-]*' test-output.log | tail -1)
           echo "percy_url=$url" >> $GITHUB_OUTPUT
-    
+
   comment:
     name: Comment Percy results
     needs: visual_tests
-    if: ${{ needs.visual_tests.result == 'success' }}
+    if: ${{ needs.visual_tests.result == 'success' && github.event.pull_request.merged == false }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code from PR
