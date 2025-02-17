@@ -1,6 +1,6 @@
 {
   "name": "kolibri-design-system",
-  "version": "5.0.0-rc12",
+  "version": "5.0.0",
   "private": false,
   "description": "The Kolibri Design System defines common design patterns and code for use in Kolibri applications",
   "repository": {
@@ -90,5 +90,9 @@
   },
   "browserslist": [
     "extends browserslist-config-kolibri"
-  ]
+  ],
+  "volta": {
+    "node": "18.20.6",
+    "yarn": "1.22.22"
+  }
 }

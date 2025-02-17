@@ -7,6 +7,84 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#910]
+  - **Description:** Pinned Node.js (18.20.6) and Yarn (1.22.22) versions using Volta.
+  - **Products impact:** none (internal updates).
+  - **Addresses:** Compatibility issues with Node.js and Yarn versions across contributors' environments.
+  - **Components:** Documentation updates for KDS setup.
+  - **Breaking:** no.
+  - **Impacts a11y:** no.
+  - **Guidance:** Developers need to install Volta if not already installed and ensure they follow the updated setup instructions in the documentation.
+
+[#910]: https://github.com/learningequality/kolibri-design-system/pull/910
+
+
+
+- [#929]
+  - **Description:** Bumps KDS version to 5.0.0
+  - **Products impact:** -
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -.
+
+[#929]: https://github.com/learningequality/kolibri-design-system/pull/929
+
+
+
+- [#919]
+  - **Description:** Additional category icons are now available
+  - **Products impact:** -
+  - **Addresses:** -
+  - **Components:** KIcon
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:** New icons can now be used
+
+[#919]: https://github.com/learningequality/kolibri-design-system/pull/919
+
+
+
+- [#923]
+  - **Description:** Fixes glob query in extrac api script.
+  - **Products impact:** bugfix.
+  - **Addresses:** -.
+  - **Components:** Docs.
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** .
+
+[#923]: https://github.com/learningequality/kolibri-design-system/pull/923
+
+
+
+- [#922]
+  - **Description:** Fixes playground path in dev docs and gitignore
+  - **Products impact:** internal docs.
+  - **Addresses:** -.
+  - **Components:** -.
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -.
+
+[#922]: https://github.com/learningequality/kolibri-design-system/pull/922
+
+
+
+- [#873]
+  - **Description:**  Implemented `DocsExample` component with toggle functionality for switching between an example and its code snippet in the KDS documentation.
+  - **Products impact:** none
+  - **Addresses:** https://github.com/learningequality/kolibri-design-system/issues/826
+  - **Components:** -
+  - **Breaking:** no
+  - **Impacts a11y:** no
+  - **Guidance:** -
+
+[#873]: https://github.com/learningequality/kolibri-design-system/pull/873
+
+
+
 - [#916]
   - **Description:** Fixes the no usable sandbox error observed in visual test workflow after merging of visual testing PR.
   - **Products impact:** bugfix
