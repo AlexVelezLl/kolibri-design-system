@@ -27,7 +27,11 @@ jobs:
     needs: pre_job
     if: ${{ needs.pre_job.outputs.should_skip != 'true' }}
     runs-on: ubuntu-latest
-    environment: percy_tests
+    strategy:
+      matrix:
+        env:
+          - ${{ github.event.pull_request.merged == false && 'percy_tests' || '' }}
+    environment: ${{ matrix.env }}
     outputs:
       percy_url: ${{ steps.extract-url.outputs.percy_url }}
     steps:
