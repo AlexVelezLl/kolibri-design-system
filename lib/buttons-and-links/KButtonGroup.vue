@@ -11,6 +11,7 @@
     name: 'KButtonGroup',
     render(createElement) {
       var children = [];
+
       // Add an existence catch in case nothing is passed into the slots.
       (this.$slots.default || []).forEach(element => {
         if (element.tag) {
