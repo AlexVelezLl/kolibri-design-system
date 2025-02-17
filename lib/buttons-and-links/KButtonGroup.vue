@@ -17,7 +17,6 @@
           children.push(createElement('span', { class: 'button-group-item' }, [element]));
         }
       });
-
       return createElement('div', { class: 'button-group' }, children);
     },
   };
