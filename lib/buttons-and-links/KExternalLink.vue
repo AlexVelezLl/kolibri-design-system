@@ -113,7 +113,8 @@
           if (this.isRtl) {
             // If RTL-language, but English link, displays correct margins
             styles['marginRight'] = '8px';
-            // Checks to see if link for new tab is in same dir as page lang
+
+            // Checks to see if link for new tab is in same dir as page lang\
             if (this.text !== this.href) {
               styles['marginRight'] = '0px';
               styles['marginLeft'] = '8px';
