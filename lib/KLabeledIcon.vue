@@ -105,7 +105,6 @@
         if (!('default' in this.$slots) || !this.$slots.default.length) {
           return true;
         }
-
         const defaultSlot = this.$slots.default[0];
         return !(
           defaultSlot.text ||
