@@ -105,7 +105,6 @@
         if (!('default' in this.$slots) || !this.$slots.default.length) {
           return true;
         }
-
         const defaultSlot = this.$slots.default[0];
         return !(
           defaultSlot.text ||
@@ -142,7 +141,8 @@
 
   .labeled-icon-wrapper {
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     width: 100%;
   }
 

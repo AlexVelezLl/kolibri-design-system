@@ -7,6 +7,58 @@ Changelog is rather internal in nature. See release notes for the public overvie
 <!-- [DO NOT REMOVE-USED BY GH ACTION] PASTE CHANGELOG -->
 
 
+- [#935]
+  - **Description:** Add visual test for KIconButton component
+  - **Products impact:** None
+  - **Addresses:**  https://github.com/learningequality/kolibri-design-system/issues/927
+  - **Components:** None
+  - **Breaking:** No
+  - **Impacts a11y:** No
+  - **Guidance:**  Not required
+
+[#935]: https://github.com/learningequality/kolibri-design-system/pull/935
+
+
+
+- [#911]
+  - **Description:** Bump the github group with 2 updates
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#911]: https://github.com/learningequality/kolibri-design-system/pull/911
+
+
+
+- [#939]
+  - **Description:** Fixed KIcon alignment in KButton and KLabeledIcon to ensure vertical centering.
+  - **Products impact:** Kolibri
+  - **Addresses:** Issue #931
+  - **Components:** KButton and KLabeledIcon
+  - **Breaking:** Will this change break something in a consumer? Choose from: yes / no
+  - **Impacts a11y:** no
+  - **Guidance:** This update improves the visual alignment of KIcon within KButton and KLabeledIcon, ensuring a consistent and centered appearance.
+
+[#939]: https://github.com/learningequality/kolibri-design-system/pull/939
+
+
+
+- [#876]
+  - **Description:** Bump color from 3.2.1 to 4.2.3
+  - **Products impact:** Dev Dependency upgrade
+  - **Addresses:** -
+  - **Components:** -
+  - **Breaking:** -
+  - **Impacts a11y:** -
+  - **Guidance:** -
+
+[#876]: https://github.com/learningequality/kolibri-design-system/pull/876
+
+
+
 - [#888]
   - **Description:** Updates KDateRange logic so that end date is cleared only if start date is after end date; users can now set start date via keyboard, then select end date using the calendar view.
   - **Products impact:** none
