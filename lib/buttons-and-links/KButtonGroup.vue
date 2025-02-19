@@ -31,7 +31,6 @@
     display: inline-block;
     margin-bottom: -12px;
   }
-
   .button-group-item {
     display: inline-block;
     height: 48px;
