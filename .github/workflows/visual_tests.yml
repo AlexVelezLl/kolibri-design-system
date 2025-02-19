@@ -21,6 +21,7 @@ jobs:
         with:
           github_token: ${{ github.token }}
           paths: '["**.vue", "**.js", "**.css", "**.scss", "yarn.lock"]'
+          skip_after_successful_duplicate: false
 
   visual_tests:
     name: Frontend Visual Tests
