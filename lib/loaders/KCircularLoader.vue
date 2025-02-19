@@ -240,7 +240,6 @@
     animation-duration: 0s;
     animation-fill-mode: backwards;
   }
-
   .ui-progress-circular-determinate {
     transform: rotate(270deg);
   }
