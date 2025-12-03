@@ -157,7 +157,6 @@
             }
           }
         }
-
         if (this.iconAfter) {
           styles['marginRight'] = '8px';
         }
